@@ -2,8 +2,9 @@
 Imports System.IO
 Imports ArmadoPallets.Clases
 Imports CrystalDecisions.CrystalReports.Engine
+Imports Util.Clases.Helper
 
-Public Class IngresoPallet
+Public Class IngresoPallet : Implements IPasarLargoAncho
 
     Private Const YMARGEN = 1.2
     Private Const XMARGEN = 3
@@ -11,6 +12,9 @@ Public Class IngresoPallet
     Private WNroPallet As Integer
     Dim target As Control
 
+    'PARA EL CALCULO DE METROS CUBICOS
+    Dim WLargo As Double = 0.0
+    Dim WAncho As Double = 0.0
     Sub New(Optional ByVal WProforma As String = "", Optional ByVal WPedido As String = "", Optional ByVal XNroPallet As Integer = -1, Optional ByVal GrabarPermiso As Boolean = True)
 
         ' This call is required by the designer.
@@ -50,7 +54,7 @@ Public Class IngresoPallet
         txtPedido.Text = txtPedido.Text.Trim.PadLeft(6, "0")
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT CodigoPallet, Altura, Producto, Partida, CodigoEnvase, Bultos, KgBultos, FechaDisponible, TamanioBase FROM ArmadoPallets WHERE Proforma = '" & txtProforma.Text & "' AND Pedido = '" & txtPedido.Text & "' AND Pallet = '" & WNroPallet & "' ORDER BY Pallet")
+        Dim cm As SqlCommand = New SqlCommand("SELECT CodigoPallet, Altura, Producto, Partida, CodigoEnvase, Bultos, KgBultos, FechaDisponible, TamanioBase, Largo, Ancho, MetrosCubicos FROM ArmadoPallets WHERE Proforma = '" & txtProforma.Text & "' AND Pedido = '" & txtPedido.Text & "' AND Pallet = '" & WNroPallet & "' ORDER BY Pallet")
         Dim dr As SqlDataReader
 
         Try
@@ -62,7 +66,10 @@ Public Class IngresoPallet
 
             dr = cm.ExecuteReader()
 
+            Dim Largo As Double
+            Dim Ancho As Double
             Dim TamanioBase As String
+
             With dr
                 If .HasRows Then
 
@@ -83,6 +90,10 @@ Public Class IngresoPallet
                         Dim WKgBultoUnidad As String = _TraerKgEnvase(dgvProductos.Rows(R).Cells("Envase").Value)
                         dgvProductos.Rows(R).Cells("Tara").Value = Helper.formatonumerico(WKgBultoUnidad)
                         'dgvProductos.Rows(R).Cells("KgUnidad").Value = IIf(IsDBNull(.Item("KgBultos")), "", .Item("KgBultos"))
+
+                        Largo = OrDefault(.Item("Largo"), 0)
+                        Ancho = OrDefault(.Item("Ancho"), 0)
+                        txt_MetrosCubicos.Text = OrDefault(.Item("MetrosCubicos"), 0)
 
                     Loop
 
@@ -118,6 +129,9 @@ Public Class IngresoPallet
             If TamanioBase <> "" Then
                 txt_Base.Text = TamanioBase
             End If
+
+            WLargo = largo
+            WAncho = Ancho
 
 
         Catch ex As Exception
@@ -488,6 +502,10 @@ Public Class IngresoPallet
 
             txtAltura.Text = Helper.formatonumerico(txtAltura.Text)
 
+            If WAncho > 0 And WLargo > 0 Then
+                ActualizarMetrosCubicos()
+            End If
+
             txtDisponible.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -760,7 +778,6 @@ Public Class IngresoPallet
                 Dim WDisponible = txtDisponible.Text
                 Dim WDisponibleOrd = Helper.ordenaFecha(WDisponible)
                 Dim WBase = Trim(txt_Base.Text)
-
                 If WTerminado.ToString.Replace("-", "").Trim = "" Then
                     Continue For
                 End If
@@ -793,16 +810,24 @@ Public Class IngresoPallet
                     Throw New Exception("Debe indicar la cantidad de Kg x Unidad para el Producto " & WTerminado & " Pda: " & WPartida)
                 End If
 
+                If Val(txt_MetrosCubicos.Text) = 0 Then
+                    Throw New Exception("No se a calculado los metros cubicos del pallet, verifique altura, largo y ancho ingresados ")
+                End If
+
                 WKgUnidad = Helper.formatonumerico(WKgUnidad)
 
                 WRenglon += 1
 
                 WClave = WProforma & Helper.ceros(WNroPallet, 2) & Helper.ceros(WRenglon, 2)
 
-                cm.CommandText = String.Format("INSERT INTO ArmadoPallets (Clave, Proforma, Pedido, Pallet, Renglon, CodigoPallet, Altura, CodigoEnvase, Bultos, KgBultos, Producto, Partida, FechaDisponible, FechaDisponibleOrd, WDate, TamanioBase)" &
+                Dim ZLargo = Helper.formatonumerico(WLargo)
+                Dim ZAncho = Helper.formatonumerico(WAncho)
+                Dim WMetrosCubicos = Helper.formatonumerico(txt_MetrosCubicos.Text, 3)
+
+                cm.CommandText = String.Format("INSERT INTO ArmadoPallets (Clave, Proforma, Pedido, Pallet, Renglon, CodigoPallet, Altura, CodigoEnvase, Bultos, KgBultos, Producto, Partida, FechaDisponible, FechaDisponibleOrd, WDate, TamanioBase, Largo, Ancho, MetrosCubicos)" &
                                                " VALUES " &
-                                               "('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', {9}, '{10}', '{11}', '{12}', '{13}', '{14}', '{15}')",
-                                               WClave, WProforma, WPedido, WNroPallet, WRenglon, WCodPallet, WAltura, WEnvase, WCantUnidades, WKgUnidad, WTerminado, WPartida, WDisponible, WDisponibleOrd, WDate, WBase)
+                                               "('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}', '{18}')",
+                                               WClave, WProforma, WPedido, WNroPallet, WRenglon, WCodPallet, WAltura, WEnvase, WCantUnidades, WKgUnidad, WTerminado, WPartida, WDisponible, WDisponibleOrd, WDate, WBase, ZLargo, ZAncho, WMetrosCubicos)
                 cm.ExecuteNonQuery()
 
             Next
@@ -1136,4 +1161,26 @@ Public Class IngresoPallet
     End Sub
 
     
+    Private Sub btn_CargarLargo_Ancho_Click(sender As Object, e As EventArgs) Handles btn_CargarLargo_Ancho.Click
+        With New CargaLargoAnchoPallets(txtProforma.Text, WNroPallet)
+            .Show(Me)
+        End With
+    End Sub
+
+    Public Sub PasaLargoAncho(Largo As Double, Ancho As Double) Implements IPasarLargoAncho.PasaLargoAncho
+        WLargo = Largo
+        WAncho = Ancho
+        txt_Base.Text = Largo.ToString() & "X" & Ancho.ToString()
+        ActualizarMetrosCubicos()
+    End Sub
+    Private Sub ActualizarMetrosCubicos()
+        If Val(txtAltura.Text) > 0 Then
+            Dim MetrosCubicos As Double = Val(formatonumerico(txtAltura.Text)) * WLargo * WAncho
+            txt_MetrosCubicos.Text = formatonumerico(MetrosCubicos, 3)
+        Else
+            MsgBox("No se ingreso un valor de altura", vbExclamation)
+            txtAltura.Focus()
+            txtAltura.SelectAll()
+        End If
+    End Sub
 End Class

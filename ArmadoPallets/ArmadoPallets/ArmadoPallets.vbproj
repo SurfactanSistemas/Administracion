@@ -123,6 +123,12 @@
     <Compile Include="Formularios\Auxiliares\AuxiEnvases.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\CargaLargoAnchoPallets.Designer.vb">
+      <DependentUpon>CargaLargoAnchoPallets.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\CargaLargoAnchoPallets.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\IngresoPallet.Designer.vb">
       <DependentUpon>IngresoPallet.vb</DependentUpon>
     </Compile>
@@ -166,6 +172,7 @@
     <Compile Include="ArchivosProforma.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Interface\IPasarLargoAncho.vb" />
     <Compile Include="Login.designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -236,6 +243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Auxiliares\AuxiEnvases.resx">
       <DependentUpon>AuxiEnvases.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\CargaLargoAnchoPallets.resx">
+      <DependentUpon>CargaLargoAnchoPallets.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\IngresoPallet.resx">
       <DependentUpon>IngresoPallet.vb</DependentUpon>
@@ -337,6 +347,8 @@
     <Content Include="Resources\fin.png" />
     <Content Include="Resources\Folder.png" />
     <Content Include="Resources\formulario.png" />
+    <Content Include="Resources\iconoEdicion.png" />
+    <None Include="Resources\iconoEdicion1.png" />
     <Content Include="Resources\imagen_icono.png" />
     <Content Include="Resources\Impresora.jpg" />
     <Content Include="Resources\imprimir.png" />
@@ -421,6 +433,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

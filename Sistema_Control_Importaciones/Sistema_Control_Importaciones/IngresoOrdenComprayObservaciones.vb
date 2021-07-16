@@ -1,7 +1,12 @@
-﻿Imports GestorDeArchivos
+﻿Imports System.Data.SqlClient
+Imports System.IO
+Imports GestorDeArchivos
 Imports Util
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
+Imports Microsoft.Office.Interop
+Imports System.Configuration
+
 
 Public Class IngresoOrdenComprayObservaciones
 
@@ -25,6 +30,10 @@ Public Class IngresoOrdenComprayObservaciones
     Dim WFECHADJAI As String
 
     Dim Tabla_Aux As New DataTable
+
+
+    Dim WFechaCoordinacionAnterior As String
+    Dim WHoraCoordinacionAnterior As String
 
     Sub New(ByVal NumeroOrden As String, ByVal NumeroCarpeta As String, ByVal BaseConectar As String)
 
@@ -73,8 +82,8 @@ Public Class IngresoOrdenComprayObservaciones
 
 
         SQLCnslt = "SELECT FechaEmbarque, FechaLlegada, PagoDespacho, ImpoDespacho, VtoDespacho, PagoLetra, EntregaI, " _
-            & "EntregaII, ImpoLetra, VtoLetra, VtoLetraII, BL, Buque, Contenedor, Despacho, Tipo_cbx, Estado, FechaIngreso, FechaIngresoOrd " _
-            & "FechaCoordinacion, FechaCoordinacionOrd, HoraCoordinacion, EstadoSIMI, chk_DisponiblePagar " _
+            & "EntregaII, ImpoLetra, VtoLetra, VtoLetraII, BL, Buque, Contenedor, Despacho, Tipo_cbx, Estado, FechaIngreso, FechaIngresoOrd, " _
+            & "FechaCoordinacion, HoraCoordinacion, EstadoSIMI, chk_DisponiblePagar " _
             & "FROM Orden WHERE Clave = '" & WClave & "'"
         
         Dim RowOrden As DataRow = GetSingle(SQLCnslt, BaseConectar)
@@ -107,9 +116,12 @@ Public Class IngresoOrdenComprayObservaciones
             Dim WEstadoSImi As String = OrDefault(RowOrden.Item("EstadoSIMI"), "")
             cbx_EstadoSIMI.SelectedItem = Trim(WEstadoSImi)
 
+            'txtFechaCoordinacion.Text = If(IsDBNull(RowOrden.Item("FechaCoordinacion")), "", RowOrden.Item("FechaCoordinacion"))
             txtFechaCoordinacion.Text = OrDefault(RowOrden.Item("FechaCoordinacion"), "")
-            'txtFechaCoordinacion.Text = IIf(IsDBNull(RowOrden.Item("FechaCoordinacion")), "", RowOrden.Item("FechaCoordinacion"))
+            WFechaCoordinacionAnterior = txtFechaCoordinacion.Text
+
             txt_HoraCoordinacion.Text = IIf(IsDBNull(RowOrden.Item("HoraCoordinacion")), "", RowOrden.Item("HoraCoordinacion"))
+            WHoraCoordinacionAnterior = txt_HoraCoordinacion.Text
 
             Dim WDisponiblepagar As Boolean = OrDefault(RowOrden.Item("chk_DisponiblePagar"), False)
             Chk_DisponibleParaPagar.Checked = WDisponiblepagar
@@ -507,13 +519,128 @@ Public Class IngresoOrdenComprayObservaciones
 
             ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
 
+
+            'EN CASO DE QUE SE CARGARA UNA HORA Y UNA FECHA DE COORDINACION DIFERENTE A LA ANTERIOR
+            'CONSULTAMOS SI DESEA ENVIAR UN MAIL DE AVISO
+            If txtFechaCoordinacion.Text <> WFechaCoordinacionAnterior Or txt_HoraCoordinacion.Text <> WHoraCoordinacionAnterior Then
+                If MsgBox("Se modifico la fecha u hora de coordinacion¿Desea enviar un aviso?", vbYesNo) = vbYes Then
+                    EnviarAvisoDeCoordinacion()
+                End If
+            End If
+
             Close()
 
         End If
-
+        
     End Sub
     
-   
+    Private Sub EnviarAvisoDeCoordinacion()
+
+       
+        Dim oApp As Outlook._Application
+        Dim oMsg As Outlook._MailItem
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim trans As SqlTransaction = Nothing
+        
+        Try
+
+            Dim SQLCnslt As String = "SELECT "
+
+
+            oApp = New Outlook.Application()
+
+            oMsg = oApp.CreateItem(Outlook.OlItemType.olMailItem)
+            oMsg.Subject = "Aviso de Fecha y Hora de Coordinacion para la Orden Nº: " & WORDEN
+            oMsg.HTMLBody = vbCrLf & "Datos de Coordinacion: <br/>" _
+                & "Carpeta: " & "<strong>" & WCARPETA & "</strong><br/>" _
+                & "Orden: " & "<strong>" & WORDEN & "</strong><br/>" _
+                & "Proveedor: " & "<strong>" & WPROVEEDOR & " - " & UCase(txt_DesProveedor.Text) & "</strong><br/>" _
+                & "Tipo: " & "<strong>" & cbx_Tipo.SelectedItem & "</strong><br/>" _
+                & "Contenedor: " & "<strong>" & txt_Contenedor.Text & "</strong><br/>" _
+                & "Planta: " & "<strong>" & DevolverPlantaEnString() & "</strong><br/>" _
+                & "Despacho Nº: " & "<strong>" & txt_Despacho.Text & "</strong><br/>" _
+                & "Fecha y Hora Coordinacion: " & "<strong>" & txtFechaCoordinacion.Text & "  " & txt_HoraCoordinacion.Text & "</strong>"
+
+
+
+            Dim ArchivoProforma As New List(Of String)
+
+            If Directory.Exists("\\193.168.0.2\w\Impresion Pdf\Orden\" & WORDEN & "\COAS") Then
+                For Each Archivo As String In Directory.GetFiles("\\193.168.0.2\w\Impresion Pdf\Orden\" & WORDEN & "\COAS")
+                    ArchivoProforma.Add(Archivo)
+                Next
+            End If
+
+            If Directory.Exists("\\193.168.0.2\w\Impresion Pdf\Orden\" & WORDEN & "\Packing List") Then
+                For Each Archivo As String In Directory.GetFiles("\\193.168.0.2\w\Impresion Pdf\Orden\" & WORDEN & "\Packing List")
+                    ArchivoProforma.Add(Archivo)
+                Next
+            End If
+
+            If ArchivoProforma.Count > 0 Then
+                For Each Archivo As String In ArchivoProforma
+                    oMsg.Attachments.Add(Archivo)
+                Next
+            End If
+            
+            If DevolverPlantaEnString() = "I" Then
+                ' Modificar por los E-Mails que correspondan.
+
+                oMsg.To = ConfigurationManager.AppSettings("AVISO_MAILS_PLANTA_I") '"gferreyra@surfactan.com.ar"
+
+            Else
+                ' Modificar por los E-Mails que correspondan.
+                oMsg.To = ConfigurationManager.AppSettings("AVISO_MAILS_OTRAS_PLANTA") '"gferreyra@surfactan.com.ar"
+
+            End If
+
+
+            'oMsg.Display()
+
+            oMsg.Send()
+            
+            
+            If DevolverPlantaEnString() = "I" Then
+                'MODIFICAR MSG SEGUN CORRESPONDA
+                MsgBox("Aviso Enviado correctamente a Hernan Copiello, German Rodriguez y Beatriz Iglecias", MsgBoxStyle.Information)
+            Else
+                'MODIFICAR MSG SEGUN CORRESPONDA
+                MsgBox("Aviso Enviado correctamente a Hernan Copiello y Beatriz Iglecias", MsgBoxStyle.Information)
+            End If
+
+
+
+
+        Catch ex As Exception
+           
+            Throw New Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+
+        End Try
+
+    End Sub
+
+    Private Function DevolverPlantaEnString() As String
+        Dim WPta As String = ""
+        Select Case UCase(WBASEACONECTAR)
+            Case "SURFACTANSA"
+                WPta = "I"
+            Case "SURFACTAN_II"
+                WPta = "II"
+            Case "SURFACTAN_III"
+                WPta = "III"
+            Case "SURFACTAN_V"
+                WPta = "V"
+            Case "SURFACTAN_VI"
+                WPta = "VI"
+            Case "SURFACTAN_VII"
+                WPta = "VII"
+        End Select
+        
+        Return WPta
+
+    End Function
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If MsgBox("Los datos que no fueron grabados se perderan." & vbCrLf & " ¿Desea cerrar la ventana?", vbYesNo, "Aviso") = vbYes Then
             Close()

@@ -1592,7 +1592,10 @@ Public Class Proforma : Implements IConsultaPedPrepo
             Try
 
                 ' GUARDAMOS/ACTUALIZAMOS EL PDF DE LA PROFORMA.
+
                 _ActualizarPDFProforma(XNroProforma)
+
+
 
             Catch ex As Exception
 
@@ -1639,7 +1642,15 @@ Public Class Proforma : Implements IConsultaPedPrepo
                     Directory.CreateDirectory(WRutaArchivosRelacionados)
                 End If
 
-                .GuardarPDF("Proforma" & WNroProforma, WRutaArchivosRelacionados)
+                If File.Exists(WRutaArchivosRelacionados & "\" & "Proforma" & WNroProforma & ".pdf") Then
+                    If MsgBox("¿Desea generar el pdf proforma?", vbYesNo) = vbYes Then
+                        .GuardarPDF("Proforma" & WNroProforma, WRutaArchivosRelacionados)
+                    End If
+                Else
+                    .GuardarPDF("Proforma" & WNroProforma, WRutaArchivosRelacionados)
+                End If
+                
+
             Catch ex As Exception
                 Throw New Exception(ex.Message)
                 'Exit Sub

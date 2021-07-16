@@ -114,7 +114,7 @@ Public Class EmisionNotaRetiro : Implements Util.IAyudaGeneral
         Dim reporte As ReportDocument = New ReporteNotaRetiro
         reporte.SetDataSource(tabla)
         reporte.SetParameterValue("Firma", Operador.FirmaDigital)
-        reporte.SetParameterValue("Aclaracion", Operador.Descripcion)
+        reporte.SetParameterValue("Aclaración", Operador.Descripcion)
 
         Dim WImprimir As Boolean = True
 

@@ -22,7 +22,7 @@ Partial Class MostrarSoliFondos
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
@@ -51,6 +51,8 @@ Partial Class MostrarSoliFondos
         Me.txt_Titulo = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.txt_TipoParidad = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txt_DetalleAgregadoPorSergio = New System.Windows.Forms.TextBox()
         Me.panel1.SuspendLayout()
         CType(Me.dgv_FormasPago, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -62,8 +64,9 @@ Partial Class MostrarSoliFondos
         Me.panel1.Controls.Add(Me.label1)
         Me.panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.panel1.Location = New System.Drawing.Point(0, 0)
+        Me.panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.panel1.Name = "panel1"
-        Me.panel1.Size = New System.Drawing.Size(415, 40)
+        Me.panel1.Size = New System.Drawing.Size(553, 49)
         Me.panel1.TabIndex = 6
         '
         'Label2
@@ -72,9 +75,10 @@ Partial Class MostrarSoliFondos
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(239, 10)
+        Me.Label2.Location = New System.Drawing.Point(319, 12)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(155, 20)
+        Me.Label2.Size = New System.Drawing.Size(192, 25)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "SURFACTAN S.A."
         '
@@ -84,87 +88,97 @@ Partial Class MostrarSoliFondos
         Me.label1.AutoSize = True
         Me.label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold)
         Me.label1.ForeColor = System.Drawing.Color.White
-        Me.label1.Location = New System.Drawing.Point(12, 9)
+        Me.label1.Location = New System.Drawing.Point(16, 11)
+        Me.label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(170, 17)
+        Me.label1.Size = New System.Drawing.Size(203, 20)
         Me.label1.TabIndex = 0
         Me.label1.Text = "MOSTRAR SOLICITUD"
         '
         'txt_NroSolicitud
         '
         Me.txt_NroSolicitud.BackColor = System.Drawing.Color.Aqua
-        Me.txt_NroSolicitud.Location = New System.Drawing.Point(81, 43)
+        Me.txt_NroSolicitud.Location = New System.Drawing.Point(108, 53)
+        Me.txt_NroSolicitud.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_NroSolicitud.Name = "txt_NroSolicitud"
-        Me.txt_NroSolicitud.Size = New System.Drawing.Size(67, 20)
+        Me.txt_NroSolicitud.Size = New System.Drawing.Size(88, 22)
         Me.txt_NroSolicitud.TabIndex = 7
         Me.txt_NroSolicitud.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txt_Solicitante
         '
         Me.txt_Solicitante.BackColor = System.Drawing.Color.Aqua
-        Me.txt_Solicitante.Location = New System.Drawing.Point(81, 69)
+        Me.txt_Solicitante.Location = New System.Drawing.Point(108, 81)
+        Me.txt_Solicitante.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_Solicitante.Name = "txt_Solicitante"
-        Me.txt_Solicitante.Size = New System.Drawing.Size(197, 20)
+        Me.txt_Solicitante.Size = New System.Drawing.Size(261, 22)
         Me.txt_Solicitante.TabIndex = 8
         '
         'txt_Destino
         '
         Me.txt_Destino.BackColor = System.Drawing.Color.Aqua
-        Me.txt_Destino.Location = New System.Drawing.Point(81, 95)
+        Me.txt_Destino.Location = New System.Drawing.Point(108, 110)
+        Me.txt_Destino.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_Destino.Name = "txt_Destino"
-        Me.txt_Destino.Size = New System.Drawing.Size(107, 20)
+        Me.txt_Destino.Size = New System.Drawing.Size(141, 22)
         Me.txt_Destino.TabIndex = 9
         '
         'txt_Importe
         '
         Me.txt_Importe.BackColor = System.Drawing.Color.Aqua
-        Me.txt_Importe.Location = New System.Drawing.Point(81, 121)
+        Me.txt_Importe.Location = New System.Drawing.Point(108, 137)
+        Me.txt_Importe.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_Importe.Name = "txt_Importe"
-        Me.txt_Importe.Size = New System.Drawing.Size(107, 20)
+        Me.txt_Importe.Size = New System.Drawing.Size(141, 22)
         Me.txt_Importe.TabIndex = 10
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(7, 46)
+        Me.Label3.Location = New System.Drawing.Point(9, 57)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(70, 13)
+        Me.Label3.Size = New System.Drawing.Size(92, 17)
         Me.Label3.TabIndex = 11
         Me.Label3.Text = "Nro. Solicitud"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(7, 72)
+        Me.Label4.Location = New System.Drawing.Point(9, 86)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(56, 13)
+        Me.Label4.Size = New System.Drawing.Size(73, 17)
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "Solicitante"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(7, 98)
+        Me.Label5.Location = New System.Drawing.Point(9, 114)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(43, 13)
+        Me.Label5.Size = New System.Drawing.Size(56, 17)
         Me.Label5.TabIndex = 13
         Me.Label5.Text = "Destino"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(7, 124)
+        Me.Label6.Location = New System.Drawing.Point(9, 141)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(42, 13)
+        Me.Label6.Size = New System.Drawing.Size(55, 17)
         Me.Label6.TabIndex = 14
         Me.Label6.Text = "Importe"
         '
         'txt_DescripDestino
         '
         Me.txt_DescripDestino.BackColor = System.Drawing.Color.Aqua
-        Me.txt_DescripDestino.Location = New System.Drawing.Point(194, 95)
+        Me.txt_DescripDestino.Location = New System.Drawing.Point(259, 110)
+        Me.txt_DescripDestino.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_DescripDestino.Name = "txt_DescripDestino"
-        Me.txt_DescripDestino.Size = New System.Drawing.Size(218, 20)
+        Me.txt_DescripDestino.Size = New System.Drawing.Size(289, 22)
         Me.txt_DescripDestino.TabIndex = 15
         '
         'dgv_FormasPago
@@ -172,24 +186,25 @@ Partial Class MostrarSoliFondos
         Me.dgv_FormasPago.AllowUserToAddRows = False
         Me.dgv_FormasPago.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_FormasPago.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FormaPago})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_FormasPago.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_FormasPago.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgv_FormasPago.DoubleBuffered = True
         Me.dgv_FormasPago.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgv_FormasPago.Location = New System.Drawing.Point(10, 268)
+        Me.dgv_FormasPago.Location = New System.Drawing.Point(13, 304)
+        Me.dgv_FormasPago.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dgv_FormasPago.Name = "dgv_FormasPago"
         Me.dgv_FormasPago.OrdenamientoColumnasHabilitado = True
         Me.dgv_FormasPago.RowHeadersWidth = 15
         Me.dgv_FormasPago.RowTemplate.Height = 20
         Me.dgv_FormasPago.ShowCellToolTips = False
         Me.dgv_FormasPago.SinClickDerecho = False
-        Me.dgv_FormasPago.Size = New System.Drawing.Size(399, 132)
+        Me.dgv_FormasPago.Size = New System.Drawing.Size(532, 162)
         Me.dgv_FormasPago.TabIndex = 16
         '
         'FormaPago
@@ -202,18 +217,20 @@ Partial Class MostrarSoliFondos
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(7, 251)
+        Me.Label7.Location = New System.Drawing.Point(9, 282)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(84, 13)
+        Me.Label7.Size = New System.Drawing.Size(112, 17)
         Me.Label7.TabIndex = 17
         Me.Label7.Text = "Formas de Pago"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(7, 150)
+        Me.Label8.Location = New System.Drawing.Point(9, 167)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(69, 13)
+        Me.Label8.Size = New System.Drawing.Size(91, 17)
         Me.Label8.TabIndex = 19
         Me.Label8.Text = "Importe Total"
         '
@@ -221,17 +238,19 @@ Partial Class MostrarSoliFondos
         '
         Me.txt_ImporteTotal.BackColor = System.Drawing.Color.Aqua
         Me.txt_ImporteTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_ImporteTotal.Location = New System.Drawing.Point(81, 147)
+        Me.txt_ImporteTotal.Location = New System.Drawing.Point(108, 163)
+        Me.txt_ImporteTotal.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_ImporteTotal.Name = "txt_ImporteTotal"
-        Me.txt_ImporteTotal.Size = New System.Drawing.Size(107, 20)
+        Me.txt_ImporteTotal.Size = New System.Drawing.Size(141, 23)
         Me.txt_ImporteTotal.TabIndex = 18
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(221, 124)
+        Me.Label9.Location = New System.Drawing.Point(295, 141)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(43, 13)
+        Me.Label9.Size = New System.Drawing.Size(57, 17)
         Me.Label9.TabIndex = 21
         Me.Label9.Text = "Paridad"
         Me.Label9.Visible = False
@@ -239,9 +258,10 @@ Partial Class MostrarSoliFondos
         'txt_Paridad
         '
         Me.txt_Paridad.BackColor = System.Drawing.Color.Aqua
-        Me.txt_Paridad.Location = New System.Drawing.Point(284, 121)
+        Me.txt_Paridad.Location = New System.Drawing.Point(379, 137)
+        Me.txt_Paridad.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_Paridad.Name = "txt_Paridad"
-        Me.txt_Paridad.Size = New System.Drawing.Size(107, 20)
+        Me.txt_Paridad.Size = New System.Drawing.Size(141, 22)
         Me.txt_Paridad.TabIndex = 20
         Me.txt_Paridad.Visible = False
         '
@@ -249,27 +269,30 @@ Partial Class MostrarSoliFondos
         '
         Me.txt_Detalle.BackColor = System.Drawing.Color.Aqua
         Me.txt_Detalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_Detalle.Location = New System.Drawing.Point(81, 201)
+        Me.txt_Detalle.Location = New System.Drawing.Point(108, 217)
+        Me.txt_Detalle.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_Detalle.MaxLength = 100
         Me.txt_Detalle.Multiline = True
         Me.txt_Detalle.Name = "txt_Detalle"
-        Me.txt_Detalle.Size = New System.Drawing.Size(328, 48)
+        Me.txt_Detalle.Size = New System.Drawing.Size(436, 58)
         Me.txt_Detalle.TabIndex = 22
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(7, 204)
+        Me.Label10.Location = New System.Drawing.Point(9, 221)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(46, 26)
+        Me.Label10.Size = New System.Drawing.Size(59, 34)
         Me.Label10.TabIndex = 23
         Me.Label10.Text = "Banco y" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Fecha"
         '
         'btn_Cerrar
         '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(322, 47)
+        Me.btn_Cerrar.Location = New System.Drawing.Point(428, 56)
+        Me.btn_Cerrar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btn_Cerrar.Name = "btn_Cerrar"
-        Me.btn_Cerrar.Size = New System.Drawing.Size(75, 38)
+        Me.btn_Cerrar.Size = New System.Drawing.Size(100, 47)
         Me.btn_Cerrar.TabIndex = 24
         Me.btn_Cerrar.Text = "CERRAR"
         Me.btn_Cerrar.UseVisualStyleBackColor = True
@@ -278,28 +301,31 @@ Partial Class MostrarSoliFondos
         '
         Me.txt_DetalleDePago.BackColor = System.Drawing.Color.Aqua
         Me.txt_DetalleDePago.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_DetalleDePago.Location = New System.Drawing.Point(75, 406)
+        Me.txt_DetalleDePago.Location = New System.Drawing.Point(100, 472)
+        Me.txt_DetalleDePago.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_DetalleDePago.MaxLength = 100
         Me.txt_DetalleDePago.Multiline = True
         Me.txt_DetalleDePago.Name = "txt_DetalleDePago"
-        Me.txt_DetalleDePago.Size = New System.Drawing.Size(328, 54)
+        Me.txt_DetalleDePago.Size = New System.Drawing.Size(436, 66)
         Me.txt_DetalleDePago.TabIndex = 25
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(2, 409)
+        Me.Label11.Location = New System.Drawing.Point(3, 475)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(67, 26)
+        Me.Label11.Size = New System.Drawing.Size(88, 34)
         Me.Label11.TabIndex = 26
         Me.Label11.Text = "Observacion" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " de Pago"
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(7, 178)
+        Me.Label12.Location = New System.Drawing.Point(9, 194)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(33, 13)
+        Me.Label12.Size = New System.Drawing.Size(43, 17)
         Me.Label12.TabIndex = 30
         Me.Label12.Text = "Titulo"
         '
@@ -307,17 +333,19 @@ Partial Class MostrarSoliFondos
         '
         Me.txt_Titulo.BackColor = System.Drawing.Color.Aqua
         Me.txt_Titulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_Titulo.Location = New System.Drawing.Point(81, 175)
+        Me.txt_Titulo.Location = New System.Drawing.Point(108, 190)
+        Me.txt_Titulo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_Titulo.Name = "txt_Titulo"
-        Me.txt_Titulo.Size = New System.Drawing.Size(328, 20)
+        Me.txt_Titulo.Size = New System.Drawing.Size(436, 23)
         Me.txt_Titulo.TabIndex = 29
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(221, 150)
+        Me.Label13.Location = New System.Drawing.Point(295, 167)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(56, 13)
+        Me.Label13.Size = New System.Drawing.Size(74, 17)
         Me.Label13.TabIndex = 32
         Me.Label13.Text = "Tipo Dolar"
         Me.Label13.Visible = False
@@ -325,17 +353,42 @@ Partial Class MostrarSoliFondos
         'txt_TipoParidad
         '
         Me.txt_TipoParidad.BackColor = System.Drawing.Color.Aqua
-        Me.txt_TipoParidad.Location = New System.Drawing.Point(284, 147)
+        Me.txt_TipoParidad.Location = New System.Drawing.Point(379, 163)
+        Me.txt_TipoParidad.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_TipoParidad.Name = "txt_TipoParidad"
-        Me.txt_TipoParidad.Size = New System.Drawing.Size(107, 20)
+        Me.txt_TipoParidad.Size = New System.Drawing.Size(141, 22)
         Me.txt_TipoParidad.TabIndex = 31
         Me.txt_TipoParidad.Visible = False
         '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(3, 544)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(52, 17)
+        Me.Label14.TabIndex = 34
+        Me.Label14.Text = "Detalle"
+        '
+        'txt_DetalleAgregadoPorSergio
+        '
+        Me.txt_DetalleAgregadoPorSergio.BackColor = System.Drawing.Color.Aqua
+        Me.txt_DetalleAgregadoPorSergio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_DetalleAgregadoPorSergio.Location = New System.Drawing.Point(100, 541)
+        Me.txt_DetalleAgregadoPorSergio.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_DetalleAgregadoPorSergio.MaxLength = 100
+        Me.txt_DetalleAgregadoPorSergio.Multiline = True
+        Me.txt_DetalleAgregadoPorSergio.Name = "txt_DetalleAgregadoPorSergio"
+        Me.txt_DetalleAgregadoPorSergio.Size = New System.Drawing.Size(436, 66)
+        Me.txt_DetalleAgregadoPorSergio.TabIndex = 33
+        '
         'MostrarSoliFondos
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 464)
+        Me.ClientSize = New System.Drawing.Size(553, 611)
+        Me.Controls.Add(Me.Label14)
+        Me.Controls.Add(Me.txt_DetalleAgregadoPorSergio)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.txt_TipoParidad)
         Me.Controls.Add(Me.Label12)
@@ -361,6 +414,7 @@ Partial Class MostrarSoliFondos
         Me.Controls.Add(Me.txt_Solicitante)
         Me.Controls.Add(Me.txt_NroSolicitud)
         Me.Controls.Add(Me.panel1)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "MostrarSoliFondos"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.panel1.ResumeLayout(False)
@@ -398,4 +452,6 @@ Partial Class MostrarSoliFondos
     Friend WithEvents txt_Titulo As System.Windows.Forms.TextBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents txt_TipoParidad As System.Windows.Forms.TextBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents txt_DetalleAgregadoPorSergio As System.Windows.Forms.TextBox
 End Class
