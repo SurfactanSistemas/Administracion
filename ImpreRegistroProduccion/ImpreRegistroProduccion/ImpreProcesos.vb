@@ -201,7 +201,7 @@ Public Class ImpreProcesos
         '
         'TODO: Filtrar por otra cosa que no sa ]MarcaFactura = 1
         '
-        Dim WPed As DataTable = GetAll("SELECT c.Razon, c.Provincia, c.EmailCoa, t.Descripcion, p.* FROM Pedido p INNER JOIN Cliente c ON c.Cliente = p.Cliente INNER JOIN Terminado t ON t.Codigo = p.Terminado WHERE p.Pedido = '" & WNroPedido & "' And p.MarcaFactura = '1' And ISNULL(p.Facturado, 0) < ISNULL(p.Cantidad, 0) ORDER BY p.Renglon", "SurfactanSa")
+        Dim WPed As DataTable = GetAll("SELECT c.Razon, c.Provincia, c.EmailCoa, t.Descripcion, p.* FROM Pedido p INNER JOIN Cliente c ON c.Cliente = p.Cliente INNER JOIN Terminado t ON t.Codigo = p.Terminado WHERE p.Pedido = '" & WNroPedido & "' And p.MarcaFactura = '1' And ISNULL(p.Facturado, 0) <= ISNULL(p.Cantidad, 0) and ISNULL(p.Facturado, 0) > 0 ORDER BY p.Renglon", "SurfactanSa")
         Dim WDir As String() = {"grodriguez", "hsein", "calidad3", "calidad2", "calidad", "ebiglieri", "isocalidad", "hmuller", "scoppiello", "sup3", "planta7", "pcanteros"}
         Dim WDirecciones As String = ""
 
@@ -363,7 +363,11 @@ Public Class ImpreProcesos
 
             Next
 
-            If arch.Trim <> "" Then WArchivos.Add(arch)
+            If arch.Trim <> "" Then
+                WArchivos.Add(arch)
+            Else
+                MsgBox("No se encuentra el FDS de " & r("Terminado"), MsgBoxStyle.Information)
+            End If
 
         Next
 

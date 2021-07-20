@@ -37,7 +37,7 @@ Public Class LoginNotaRetiro
 
         If WAutorizados.Contains(WOperador(0)) Then
             Operador.FirmaDigital = Clases.Helper.FirmaDigital(WOperador(0))
-            Operador.Descripcion = Clases.Helper.FirmaDigital(WOperador(1))
+            Operador.Descripcion = Trim(WOperador(1))
 
             DialogResult = Windows.Forms.DialogResult.OK
 
