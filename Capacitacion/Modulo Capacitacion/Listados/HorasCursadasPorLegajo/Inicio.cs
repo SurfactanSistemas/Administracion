@@ -56,6 +56,12 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
                     cmd.CommandText = "UPDATE Legajo SET Horas = 0, HorasTotal = 0, Puntaje = 9";
                     cmd.ExecuteNonQuery();
 
+                    cmd.CommandText = "UPDATE Legajo SET FEgresoOrd = RIGHT(FEgreso, 4) + SUBSTRING(FEgreso, 4,2) + left(FEgreso, 2)";
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "UPDATE Legajo SET FIngresoOrd = RIGHT(FIngreso, 4) + SUBSTRING(FIngreso, 4,2) + left(FIngreso, 2)";
+                    cmd.ExecuteNonQuery();
+
                     cmd.CommandText =
                         "SELECT c.Curso, c.Legajo, c.Horas, c.Fecha, c.Clave, c.Tema, l.Descripcion, l.Puntaje, l.FEgreso, Activo = case l.Fegreso WHEN '00/00/0000' THEN 'S' WHEN '  /  /    ' THEN 'S' ELSE 'N' END FROM Cursadas c LEFT OUTER JOIN Legajo l ON L.Codigo = C.Legajo AND L.Renglon = 1 WHERE c.Ordfecha BETWEEN '" + WDesdeOrd + "' And '" + WHastaOrd + "' ORDER BY c.Clave";
 
@@ -106,7 +112,7 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
             rpt.SetParameterValue("Hasta", txtHasta.Text);
 
             frm.CargarReporte(rpt,
-                "{Legajo.Renglon} = 1 AND {Legajo.Descripcion} <> '' AND {Legajo.HorasTotal} IN 0 TO 9999 AND {Legajo.Puntaje} = 0");
+                "{Legajo.Renglon} = 1 AND {Legajo.Descripcion} <> '' AND {Legajo.HorasTotal} IN 0 TO 9999 " + (rbTodos.Checked ? "AND ({Legajo.Codigo} < 900 OR {Legajo.Codigo} >= 1000) AND ({Legajo.FEgresoOrd} >= '" + WDesdeOrd + "' OR {Legajo.FEgreso} = '  /  /    ' OR {Legajo.FEgreso} = '00/00/0000') AND {Legajo.FIngresoOrd} <= '" + WHastaOrd + "'" : "AND {Legajo.Puntaje} = 0"));
             return frm;
         }
 

@@ -387,7 +387,7 @@ namespace Modulo_Capacitacion.Novedades
                                         + " DesSector, DesCurso, DesTema, Observaciones, Perfil, Sector) "
                                         + " VALUES "
                                         + " ('" + WClave + "', " + WCodigo + "," + WRenglon + ", " + WTema + ", " + WCurso + ", '" + WFecha + "', '" + WFechaOrd + "', "
-                                        + " " + WHoras + ", " + WTipoI + ", " + WTipoII + ", '" + WInstructor + "', '" + WActividad + "', '" + WTemas + "', "
+                                        + " '" + WHoras + "', " + WTipoI + ", " + WTipoII + ", '" + WInstructor + "', '" + WActividad + "', '" + WTemas + "', "
                                         + " " + WLegajo + ", '" + WDescLegajo + "', '" + WDescSector + "', '', '', '" + WObservaciones + "', '" + WPerfil + "', '" + WSector + "' )";
                         cmd.ExecuteNonQuery();
 
@@ -444,7 +444,7 @@ namespace Modulo_Capacitacion.Novedades
             // Se agrega validación en la cantidad de horas cargadas.
             txtHoras.Text = Helper.FormatoNumerico(txtHoras.Text);
 
-            double WHoras = double.Parse(txtHoras.Text);
+            double WHoras = double.Parse(txtHoras.Text.Replace(".", ","));
 
             if (WHoras == 0)
             {

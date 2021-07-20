@@ -36,18 +36,20 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
             this.LBChofer = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.txtHasta = new System.Windows.Forms.MaskedTextBox();
+            this.txtDesde = new System.Windows.Forms.MaskedTextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label4 = new System.Windows.Forms.Label();
             this.CB_Tipo = new System.Windows.Forms.ComboBox();
             this.TB_AñoDesde = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.BT_Pantalla = new System.Windows.Forms.Button();
             this.BT_Imprimir = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtDesde = new System.Windows.Forms.MaskedTextBox();
-            this.txtHasta = new System.Windows.Forms.MaskedTextBox();
+            this.rbSoloCapacitados = new System.Windows.Forms.RadioButton();
+            this.rbTodos = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -88,6 +90,8 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.rbTodos);
+            this.panel3.Controls.Add(this.rbSoloCapacitados);
             this.panel3.Controls.Add(this.txtHasta);
             this.panel3.Controls.Add(this.txtDesde);
             this.panel3.Controls.Add(this.progressBar1);
@@ -106,11 +110,34 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
             this.panel3.Size = new System.Drawing.Size(401, 188);
             this.panel3.TabIndex = 0;
             // 
+            // txtHasta
+            // 
+            this.txtHasta.Location = new System.Drawing.Point(269, 22);
+            this.txtHasta.Mask = "00/00/0000";
+            this.txtHasta.Name = "txtHasta";
+            this.txtHasta.PromptChar = ' ';
+            this.txtHasta.Size = new System.Drawing.Size(67, 20);
+            this.txtHasta.TabIndex = 91;
+            this.txtHasta.Text = "00000000";
+            this.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDesde
+            // 
+            this.txtDesde.Location = new System.Drawing.Point(128, 22);
+            this.txtDesde.Mask = "00/00/0000";
+            this.txtDesde.Name = "txtDesde";
+            this.txtDesde.PromptChar = ' ';
+            this.txtDesde.Size = new System.Drawing.Size(67, 20);
+            this.txtDesde.TabIndex = 91;
+            this.txtDesde.Text = "00000000";
+            this.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDesde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDesde_KeyDown);
+            // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(19, 86);
+            this.progressBar1.Location = new System.Drawing.Point(19, 108);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(362, 32);
+            this.progressBar1.Size = new System.Drawing.Size(362, 26);
             this.progressBar1.TabIndex = 90;
             this.progressBar1.Visible = false;
             // 
@@ -145,6 +172,26 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
             this.TB_AñoDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_AñoDesde.Visible = false;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(211, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 18);
+            this.label2.TabIndex = 86;
+            this.label2.Text = "Hasta";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(65, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 18);
+            this.label1.TabIndex = 86;
+            this.label1.Text = "Desde";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -163,7 +210,7 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
             this.BT_Pantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Pantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Pantalla.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Pantalla.Location = new System.Drawing.Point(85, 135);
+            this.BT_Pantalla.Location = new System.Drawing.Point(85, 141);
             this.BT_Pantalla.Name = "BT_Pantalla";
             this.BT_Pantalla.Size = new System.Drawing.Size(40, 40);
             this.BT_Pantalla.TabIndex = 81;
@@ -177,7 +224,7 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
             this.BT_Imprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Imprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Imprimir.Location = new System.Drawing.Point(180, 135);
+            this.BT_Imprimir.Location = new System.Drawing.Point(180, 141);
             this.BT_Imprimir.Name = "BT_Imprimir";
             this.BT_Imprimir.Size = new System.Drawing.Size(40, 40);
             this.BT_Imprimir.TabIndex = 80;
@@ -191,55 +238,34 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(275, 135);
+            this.BT_Salir.Location = new System.Drawing.Point(275, 141);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 79;
             this.BT_Salir.UseVisualStyleBackColor = true;
             this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
             // 
-            // label1
+            // rbSoloCapacitados
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(65, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 18);
-            this.label1.TabIndex = 86;
-            this.label1.Text = "Desde";
+            this.rbSoloCapacitados.AutoSize = true;
+            this.rbSoloCapacitados.Checked = true;
+            this.rbSoloCapacitados.Location = new System.Drawing.Point(100, 84);
+            this.rbSoloCapacitados.Name = "rbSoloCapacitados";
+            this.rbSoloCapacitados.Size = new System.Drawing.Size(132, 17);
+            this.rbSoloCapacitados.TabIndex = 92;
+            this.rbSoloCapacitados.TabStop = true;
+            this.rbSoloCapacitados.Text = "SÓLO CAPACITADOS";
+            this.rbSoloCapacitados.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // rbTodos
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(211, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 18);
-            this.label2.TabIndex = 86;
-            this.label2.Text = "Hasta";
-            // 
-            // txtDesde
-            // 
-            this.txtDesde.Location = new System.Drawing.Point(128, 22);
-            this.txtDesde.Mask = "00/00/0000";
-            this.txtDesde.Name = "txtDesde";
-            this.txtDesde.PromptChar = ' ';
-            this.txtDesde.Size = new System.Drawing.Size(67, 20);
-            this.txtDesde.TabIndex = 91;
-            this.txtDesde.Text = "00000000";
-            this.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtDesde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDesde_KeyDown);
-            // 
-            // txtHasta
-            // 
-            this.txtHasta.Location = new System.Drawing.Point(269, 22);
-            this.txtHasta.Mask = "00/00/0000";
-            this.txtHasta.Name = "txtHasta";
-            this.txtHasta.PromptChar = ' ';
-            this.txtHasta.Size = new System.Drawing.Size(67, 20);
-            this.txtHasta.TabIndex = 91;
-            this.txtHasta.Text = "00000000";
-            this.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.rbTodos.AutoSize = true;
+            this.rbTodos.Location = new System.Drawing.Point(238, 84);
+            this.rbTodos.Name = "rbTodos";
+            this.rbTodos.Size = new System.Drawing.Size(63, 17);
+            this.rbTodos.TabIndex = 92;
+            this.rbTodos.Text = "TODOS";
+            this.rbTodos.UseVisualStyleBackColor = true;
             // 
             // Inicio
             // 
@@ -281,5 +307,7 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
         private MaskedTextBox txtDesde;
         private Label label2;
         private Label label1;
+        private RadioButton rbTodos;
+        private RadioButton rbSoloCapacitados;
     }
 }
